@@ -3,11 +3,13 @@ import Quote from './Quote';
 
 export default class QuoteSet {
 
-    constructor(Quotes, Places, Carriers, Currencies) {
+    constructor(Quotes, Places, Carriers, Currencies, referral_url) {
         this.Quotes = Quotes;
         this.Places = Places;
         this.Carriers = Carriers;
         this.Currencies = Currencies;
+
+        this.referral_url = referral_url;
     }
 
     length() {
@@ -15,13 +17,18 @@ export default class QuoteSet {
     }
 
     row(index) {
-        const
-            quote = this.Quotes[index];
+        const quote = this.Quotes[index];
 
-            const outbound = this.createLeg(quote.OutboundLeg);
-            const inbound = this.createLeg(quote.InboundLeg);
+        const outbound = this.createLeg(quote.OutboundLeg);
+        const inbound = this.createLeg(quote.InboundLeg);
 
-            return new Quote(quote.QuoteId, this.Currencies[0], quote.MinPrice, quote.Direct, outbound, inbound)
+        return new Quote(quote.QuoteId, this.Currencies[0], quote.MinPrice, quote.Direct, outbound, inbound)
+    }
+
+    map(fn) {
+        return Object.keys(this.Quotes).map(index => {
+            return fn(this.row(index), index)
+        });
     }
 
     createLeg(input) {
@@ -56,5 +63,9 @@ export default class QuoteSet {
         });
 
         return output;
+    }
+
+    referralUrl() {
+        return this.referral_url;
     }
 }

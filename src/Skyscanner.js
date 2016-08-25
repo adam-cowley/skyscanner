@@ -91,16 +91,15 @@ export default class Skyscanner {
     browsequotes(originPlace, destinationPlace = 'everywhere', outboundPartialDate, inboundPartialDate) {
         return this.get('browsequotes', this.version, this.market, this.currency, this.locale, originPlace, destinationPlace, outboundPartialDate, inboundPartialDate)
             .then(r => {
-                return new QuoteSet(r.Quotes, r.Places, r.Carriers, r.Currencies);
+                const referral_url = this.referral(originPlace, destinationPlace, outboundPartialDate, inboundPartialDate)
+                return new QuoteSet(r.Quotes, r.Places, r.Carriers, r.Currencies, referral_url);
             })
     }
-//http://partners.api.skyscanner.net/apiservices/referral/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}?apiKey={shortApiKey}
+
     referral(originPlace, destinationPlace, outboundPartialDate, inboundPartialDate) {
         outboundPartialDate = outboundPartialDate.substr(0, '2016-01-01'.length);
         inboundPartialDate = inboundPartialDate.substr(0, '2016-01-01'.length);
 
         return this.endpoint(['referral', this.version, this.market, this.currency, this.locale, originPlace, destinationPlace, outboundPartialDate, inboundPartialDate], {apiKey: this.shortApiKey()});
-
-        return this.get('referral', this.version, this.market, this.currency, this.locale, originPlace, destinationPlace, outboundPartialDate, inboundPartialDate);
     }
 }
