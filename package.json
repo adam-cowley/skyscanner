@@ -1,10 +1,11 @@
 {
   "name": "skyscanner-node",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Skyscanner SDK for Node JS",
   "main": "lib/Skyscanner.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile":"babel --presets es2015 -d lib/ src/"
   },
   "author": "@adamcowley",
   "repository": {
