@@ -1,5 +1,7 @@
 
-const Skyscanner = require('./lib/Skyscanner')('YOUR_API_KET');
+import Skyscanner from './lib/Skyscanner';
+
+const service = new Skyscanner('co498777447573845420689543475114');
 
 
 const originPlace = 'LOND-sky';
