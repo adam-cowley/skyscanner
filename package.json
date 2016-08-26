@@ -1,6 +1,6 @@
 {
   "name": "skyscanner-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Skyscanner SDK for Node JS",
   "main": "lib/Skyscanner.js",
   "scripts": {
